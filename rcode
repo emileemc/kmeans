@@ -1,0 +1,20 @@
+setwd
+
+ABC <-read.table("AbcBank.csv",header=TRUE, sep=",")
+
+ABC_num<- ABC[,2:5]
+ABC_scaled <-as.data.frame(scale(ABC_num))
+
+k3<- kmeans(ABC_scaled, centers=3, nstart=25)
+library(factoextra)
+fviz_cluster(k3, data=ABC_scaled,
+             ellipse.type="convex",
+             axes =c(1,2),
+             geom="point",
+             label="none",
+             ggtheme=theme_classic())
+
+    k3$centers          
+
+    ABC$Cluster<-as.numeric(k3$cluster)
+    
